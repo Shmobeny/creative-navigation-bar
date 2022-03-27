@@ -4,6 +4,7 @@
   --bg-color: #333;
   --nav-color: azure;
   --scope-color: aqua;
+  --animation-duration: 200ms;
 }
 
 body,
@@ -58,7 +59,7 @@ body {
   width: 85px;
   margin: 0 15px;
   border-radius: 10px;
-  transition: transform 150ms ease-in-out;
+  transition: transform var(--animation-duration) ease-in-out;
 }
 
 .navbar-body .navbar-item label {
@@ -90,7 +91,7 @@ body {
   border-radius: 50%;
 
   transform: translateX(257.5px);
-  transition: transform 150ms ease-in-out;
+  transition: transform var(--animation-duration) ease-in-out;
 }
 
 .scope::before,
@@ -149,6 +150,6 @@ body {
 #messages:checked ~ .navbar-item:nth-of-type(3) p,
 #gallery:checked ~ .navbar-item:nth-of-type(4) p,
 #settings:checked ~ .navbar-item:nth-of-type(5) p {
-  transition: opacity 150ms ease-in-out 150ms;
+  transition: opacity var(--animation-duration) ease-in-out var(--animation-duration);
   opacity: 1;
 }
