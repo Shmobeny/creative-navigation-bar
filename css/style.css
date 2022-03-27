@@ -83,7 +83,6 @@ body {
   box-sizing: border-box;
   position: absolute;
   top: -45px;
-  /* top: -42.5px; */
   width: 90px;
   height: 90px;
   background-color: var(--scope-color);
@@ -99,17 +98,17 @@ body {
   display: block;
   position: absolute;
   top: 35px;
-  left: -10px;
-  width: 5px;
-  height: 5px;
-  background-color: var(--nav-color);
+  left: -14px;
+  width: 10px;
+  height: 10px;
+  background-color: transparent;
   border-top: 5px solid var(--bg-color);
   border-right: 5px solid var(--bg-color);
   border-radius: 0 100% 0 0;
 }
 
 .scope::after {
-  left: 80px;
+  left: 79px;
   border-right: 0;
   border-left: 5px solid var(--bg-color);
   border-radius: 100% 0 0 0;
