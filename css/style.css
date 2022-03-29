@@ -29,13 +29,16 @@ body {
 }
 
 .navbar-body {
-  height: 100px;
+  width: 576px;
+  height: 90px;
+  box-sizing: border-box;
+  padding: 0 30px;
   font-family: 'Hind', sans-serif;
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: bold;
   text-transform: uppercase;
   background-color: var(--nav-color);
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
 .navbar-body ul {
@@ -43,7 +46,8 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 0 15px;
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
 
@@ -62,7 +66,7 @@ body {
   flex-direction: column;
   position: relative;
   width: 90px;
-  margin: 0 15px;
+  height: 100%;
   border-radius: 10px;
   transition: transform var(--animation-duration) ease-in-out;
 }
@@ -102,20 +106,25 @@ body {
   content: '';
   display: block;
   position: absolute;
-  top: 50%;
+  top: 40px;
   left: -14px;
-  width: 0px;
-  height: 0px;
-  border: 5px solid transparent;
+  width: 5px;
+  height: 5px;
   background-color: transparent;
-  border-radius: 0 100% 0 0;
-  box-shadow: 2px -2px 0 2px var(--bg-color);
+  border-top: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-radius: 0 10px 0 0;
+  box-shadow: 1px -1px 0 0 var(--bg-color),
+              3px -3px 0 0 var(--bg-color);
 }
 
 .scope::after {
   left: 84px;
-  border-radius: 100% 0 0 0;
-  box-shadow: -2px -2px 0 2px var(--bg-color);
+  border-right: 0;
+  border-left: 5px solid transparent;
+  border-radius: 10px 0 0 0;
+  box-shadow: -1px -1px 0 0 var(--bg-color),
+              -3px -3px 0 0 var(--bg-color);
 }
 
 
@@ -123,19 +132,19 @@ body {
 
 /* Move "Scope", when list item have status "Active" */
 #home:checked ~ .scope {
-  transform: translateX(15px);
+  transform: translateX(0);
 }
 #profile:checked ~ .scope {
-  transform: translateX(135px);
+  transform: translateX(106.5px);
 }
 #messages:checked ~ .scope {
-  transform: translateX(255px);
+  transform: translateX(213px);
 }
 #gallery:checked ~ .scope {
-  transform: translateX(375px);
+  transform: translateX(319.5px);
 }
 #settings:checked ~ .scope {
-  transform: translateX(495px);
+  transform: translateX(426px);
 }
 
 #home:checked ~ .navbar-item:nth-of-type(1),
@@ -154,4 +163,68 @@ body {
 #settings:checked ~ .navbar-item:nth-of-type(5) p {
   transition: opacity var(--animation-duration) ease-in-out var(--animation-duration);
   opacity: 1;
+}
+
+@media (max-width: 576px) {
+  body {
+    align-items: flex-end;
+  }
+
+  .navbar-body {
+    width: 100%;
+    height: 70px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .navbar-body ul {
+    max-width: 315px;
+    min-width: 315px;
+  }
+
+  .navbar-body .navbar-item {
+    width: 45px;
+  }
+
+  .navbar-body .navbar-item p {
+    top: 110%;
+  }
+
+  .scope {
+    width: 70px;
+    height: 70px;
+    top: -35px;
+    left: -12.5px;
+  }
+
+  #home:checked ~ .scope {
+    transform: translateX(0);
+  }
+  #profile:checked ~ .scope {
+    transform: translateX(67.5px);
+  }
+  #messages:checked ~ .scope {
+    transform: translateX(calc(67.5px*2));
+  }
+  #gallery:checked ~ .scope {
+    transform: translateX(calc(67.5px*3));
+  }
+  #settings:checked ~ .scope {
+    transform: translateX(calc(67.5px*4));
+  }
+
+  .scope::before,
+  .scope::after {
+    top: 30px;
+    left: -13.8px;
+  }
+
+  .scope::after {
+    left: 63.8px;
+  }
+}
+
+@media (max-width: 382px) {
+  .navbar-body {
+    border-radius: 0;
+  }
 }

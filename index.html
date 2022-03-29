@@ -3,35 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
   <title>Creative Navigation Bar</title>
 </head>
 <body> 
   <nav class="navbar-body">
     <ul>
+      <!-- Radio-buttons taking role of "logic" section -->
       <input class="navbar-radio" type="radio" id="home" name="navbar-logic" checked>
       <input class="navbar-radio" type="radio" id="profile" name="navbar-logic">
       <input class="navbar-radio" type="radio" id="messages" name="navbar-logic">
       <input class="navbar-radio" type="radio" id="gallery" name="navbar-logic">
       <input class="navbar-radio" type="radio" id="settings" name="navbar-logic">
+      
+      <!-- Block, which marks active menu item -->
       <div class="scope"></div>
+
       <li class="navbar-item">
         <label for="home"><ion-icon name="home-outline"></ion-icon></label>
         <p>Home</p>
       </li>
+
       <li class="navbar-item">
         <label for="profile"><ion-icon name="person-outline"></ion-icon></label>
         <p>Profile</p>
       </li>
+
       <li class="navbar-item">
         <label for="messages"><ion-icon name="mail-outline"></ion-icon></label>
         <p>Messages</p>
       </li>
+
       <li class="navbar-item">
         <label for="gallery"><ion-icon name="images-outline"></ion-icon></label>
         <p>Gallery</p>
       </li>
+
       <li class="navbar-item">
         <label for="settings"><ion-icon name="settings-outline"></ion-icon></label>
         <p>Settings</p>
@@ -39,6 +47,8 @@
     </ul>
   </nav>
 </body>
+
+<!-- Script just for enable ionic.io icons -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </html>
