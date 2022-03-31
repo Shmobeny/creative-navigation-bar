@@ -1,14 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 :root {
+  /* color settings (changeable) */
   --bg-color: #333;
   --nav-color: azure;
   --scope-color: aqua;
+
+  /* animation settings (changeable) */
   --animation-duration: 200ms;
+
+  /* size variables (changeable) */
+  --nav-width: 700px;
+  --nav-height: 120px;
+
+  /* sizes of items and scope (NOT changeable) */
+  --nav-item-size: var(--nav-height);
+  --nav-scope-size: var(--nav-height);
+
+  /* amount of items in navigation bar */
+  --nav-items-amount: 5;
+
+  /* calculations (NOT changeable) */
+  /* size of navbar without paddings */
+  --nav-width-clear: calc(var(--nav-width) - 60px);
+  /* summary size of gaps between items */
+  --nav-item-gap-sum: calc(var(--nav-width-clear) - (var(--nav-item-size) * var(--nav-items-amount)));
+  /* individual size of each gap  */
+  --nav-item-gap-size: calc(var(--nav-item-gap-sum) / (var(--nav-items-amount) - 1));
+ /* calculate "step" of scope, when active item is changing */
+  --nav-scope-positioner: calc(var(--nav-item-size) + var(--nav-item-gap-size));
 }
 
 ion-icon {
-  font-size: 32px;
+  font-size: 50px;
 }
 
 body,
@@ -29,8 +53,8 @@ body {
 }
 
 .navbar-body {
-  width: 576px;
-  height: 90px;
+  width: var(--nav-width);
+  height: var(--nav-height);
   box-sizing: border-box;
   padding: 0 30px;
   font-family: 'Hind', sans-serif;
@@ -65,7 +89,7 @@ body {
 .navbar-body .navbar-item {
   flex-direction: column;
   position: relative;
-  width: 90px;
+  width: var(--nav-item-size);
   height: 100%;
   border-radius: 10px;
   transition: transform var(--animation-duration) ease-in-out;
@@ -73,7 +97,7 @@ body {
 
 .navbar-body .navbar-item label {
   width: 100%;
-  height: 100px;
+  height: 100%;
   cursor: pointer;
 }
 
@@ -83,8 +107,9 @@ body {
 
 .navbar-body .navbar-item p {
   position: absolute;
-  top: 120%;
+  top: calc(var(--nav-scope-size) + (var(--nav-scope-size) / 8));
   margin: 0;
+  font-size: 24px;
   opacity: 0;
 }
 
@@ -92,21 +117,23 @@ body {
   display: block;
   box-sizing: border-box;
   position: absolute;
-  top: -45px;
-  width: 90px;
-  height: 90px;
+  top: calc(var(--nav-scope-size) / -2);
+  left: calc((var(--nav-scope-size) - var(--nav-item-size)) / -2);
+  width: var(--nav-scope-size);
+  height: var(--nav-scope-size);
   background-color: var(--scope-color);
   border: 5px solid var(--bg-color);
   border-radius: 50%;
   transition: transform var(--animation-duration) ease-in-out;
 }
 
+/* make curved corners on a both sides of the scope-element */
 .scope::before,
 .scope::after {
   content: '';
   display: block;
   position: absolute;
-  top: 40px;
+  top: calc(var(--nav-scope-size) / 2 - 5px);
   left: -14px;
   width: 5px;
   height: 5px;
@@ -119,7 +146,7 @@ body {
 }
 
 .scope::after {
-  left: 84px;
+  left: calc(100% + 4px);
   border-right: 0;
   border-left: 5px solid transparent;
   border-radius: 10px 0 0 0;
@@ -130,23 +157,24 @@ body {
 
 /* Logic sequins */
 
-/* Move "Scope", when list item have status "Active" */
+/* move "Scope", when list item have status "Active" */
 #home:checked ~ .scope {
   transform: translateX(0);
 }
 #profile:checked ~ .scope {
-  transform: translateX(106.5px);
+  transform: translateX(calc(var(--nav-scope-positioner) * 1));
 }
 #messages:checked ~ .scope {
-  transform: translateX(213px);
+  transform: translateX(calc(var(--nav-scope-positioner) * 2));
 }
 #gallery:checked ~ .scope {
-  transform: translateX(319.5px);
+  transform: translateX(calc(var(--nav-scope-positioner) * 3));
 }
 #settings:checked ~ .scope {
-  transform: translateX(426px);
+  transform: translateX(calc(var(--nav-scope-positioner) * 4));
 }
 
+/* adding list item status "Active" */
 #home:checked ~ .navbar-item:nth-of-type(1),
 #profile:checked ~ .navbar-item:nth-of-type(2),
 #messages:checked ~ .navbar-item:nth-of-type(3),
@@ -156,6 +184,7 @@ body {
   background-color: rgba(0, 0, 0, 0);
 }
 
+/* show text, when specific list item have status "Active" */
 #home:checked ~ .navbar-item:nth-of-type(1) p,
 #profile:checked ~ .navbar-item:nth-of-type(2) p,
 #messages:checked ~ .navbar-item:nth-of-type(3) p,
@@ -165,66 +194,65 @@ body {
   opacity: 1;
 }
 
-@media (max-width: 576px) {
-  body {
-    align-items: flex-end;
+/* some media queries for responsive behavior */
+/* minimum size of screen is 340px in width */
+@media (max-width: 900px) {
+  :root {
+    --nav-width: 576px;
+    --nav-height: 90px;
   }
 
-  .navbar-body {
-    width: 100%;
-    height: 70px;
-    border-radius: 10px 10px 0 0;
-  }
-
-  .navbar-body ul {
-    max-width: 315px;
-    min-width: 315px;
-  }
-
-  .navbar-body .navbar-item {
-    width: 45px;
+  ion-icon {
+    font-size: 40px;
   }
 
   .navbar-body .navbar-item p {
-    top: 110%;
-  }
-
-  .scope {
-    width: 70px;
-    height: 70px;
-    top: -35px;
-    left: -12.5px;
-  }
-
-  #home:checked ~ .scope {
-    transform: translateX(0);
-  }
-  #profile:checked ~ .scope {
-    transform: translateX(67.5px);
-  }
-  #messages:checked ~ .scope {
-    transform: translateX(calc(67.5px*2));
-  }
-  #gallery:checked ~ .scope {
-    transform: translateX(calc(67.5px*3));
-  }
-  #settings:checked ~ .scope {
-    transform: translateX(calc(67.5px*4));
-  }
-
-  .scope::before,
-  .scope::after {
-    top: 30px;
-    left: -13.8px;
-  }
-
-  .scope::after {
-    left: 63.8px;
+    font-size: 19px;
   }
 }
 
+/* mobile adaptation */
+@media (max-width: 576px) {
+  :root {
+    /* better don't touch this :) */
+    --nav-width: 315px;
+    --nav-height: 70px;
+    --nav-item-size: 45px;
+    --nav-width-clear: var(--nav-width);
+  }
+
+  ion-icon {
+    font-size: 35px;
+  }
+
+  /* make whole body of navigation bar flexible */
+  .navbar-body {
+    width: 100%;
+  }
+
+  /* but list-body must have fixed sizes */
+  .navbar-body ul {
+    max-width: var(--nav-width);
+    min-width: var(--nav-width);
+  }
+
+  .navbar-body .navbar-item p {
+    font-size: 16px;
+  }
+
+}
+
+/* remove curved corners fom navigation bar to prevent collapse in designs  */
 @media (max-width: 382px) {
   .navbar-body {
     border-radius: 0;
+  }
+}
+
+/* remove curved corners from scope to prevent collapse in design */
+@media (max-width: 357px) {
+  .scope::before,
+  .scope::after {
+    display: none;
   }
 }
